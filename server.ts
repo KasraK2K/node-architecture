@@ -5,8 +5,9 @@ import {
 import * as express from "express";
 import * as _ from "lodash";
 import { join } from "path";
-import CatDB from "./src/database/cat.database";
 import { collectionList } from "./src/models";
+import * as dotenv from "dotenv";
+import { MainDatabase } from "./src/database";
 
 class Bootstrap {
   private app: express.Application;
@@ -23,7 +24,7 @@ class Bootstrap {
   }
 
   private async database() {
-    CatDB.then(async (db) => {
+    MainDatabase.then(async (db) => {
       const createdCollections = await db.listCollections().toArray();
 
       collectionList.map(async (collection) => {
@@ -37,7 +38,9 @@ class Bootstrap {
     });
   }
 
-  private config(): void {}
+  private config(): void {
+    dotenv.config();
+  }
 
   private routes() {
     this.routerConfig = {
