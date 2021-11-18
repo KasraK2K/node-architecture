@@ -19,23 +19,7 @@ class Bootstrap {
     this.port = +process.env.PORT || 3500;
     this.config();
     this.routes();
-    this.database();
     this.start();
-  }
-
-  private async database() {
-    MainDatabase.then(async (db) => {
-      const createdCollections = await db.listCollections().toArray();
-
-      collectionList.map(async (collection) => {
-        const isCollectionRegistered = _.find(createdCollections, [
-          "name",
-          collection.name,
-        ]);
-        if (!isCollectionRegistered)
-          await db.createCollection(collection.name, collection.schema);
-      });
-    });
   }
 
   private config(): void {

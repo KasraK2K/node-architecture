@@ -8,7 +8,6 @@ export class HomeController {
   async get() {
     const result = (await LocalDB).collection(CatModel.name).insertOne({
       name: "Bani",
-      color: "Black",
     });
     return result;
   }
