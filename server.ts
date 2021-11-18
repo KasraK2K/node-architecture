@@ -5,9 +5,7 @@ import {
 import * as express from "express";
 import * as _ from "lodash";
 import { join } from "path";
-import { collectionList } from "./src/models";
 import * as dotenv from "dotenv";
-import { MainDatabase } from "./src/database";
 
 class Bootstrap {
   private app: express.Application;

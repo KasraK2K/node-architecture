@@ -1,29 +1,12 @@
-import { MongoClient } from "mongodb";
-import { ICollectionModel } from "../interfaces/database.interface";
-import { collectionList } from "../models";
 import * as _ from "lodash";
+import { DatabaseNamesEnum } from "../enums/database.enum";
+import { mongoDbMaker } from "./databaseMaker";
 
 const LocalDB = (async () => {
-  try {
-    const uri = "mongodb://localhost:27017";
-    const client = new MongoClient(uri);
-    await client.connect();
-    const database = client.db("LocalDB");
-    
-    const createdCollections = await database.listCollections().toArray();
-    collectionList.map(async (collection) => {
-      const isCollectionRegistered = _.find(createdCollections, [
-        "name",
-        collection.name,
-      ]);
-      if (!isCollectionRegistered)
-        await database.createCollection(collection.name, collection.schema);
-    });
+  const databaseURL = "mongodb://localhost:27017";
+  const databaseName = DatabaseNamesEnum.LOCAL_DB;
 
-    return database;
-  } catch {
-    console.info("LocalDB is not connected");
-  }
+  return await mongoDbMaker(databaseURL, databaseName);
 })();
 
 export default LocalDB;
