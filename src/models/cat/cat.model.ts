@@ -1,3 +1,5 @@
+import Cat from "./classes/Cat";
+
 const CatSchema = {
   validator: {
     $jsonSchema: {
@@ -17,4 +19,4 @@ const CatSchema = {
   },
 };
 
-export default { schema: CatSchema, name: "cats" };
+export default { schema: CatSchema, name: Cat.name };

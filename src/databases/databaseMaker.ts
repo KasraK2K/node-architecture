@@ -1,7 +1,7 @@
 import { Db, DbOptions, MongoClient, MongoClientOptions } from "mongodb";
 import * as _ from "lodash";
-import { ICollectionModel } from "../interfaces/database.interface";
 import { collectionList } from "../models";
+import { ICollectionModel } from "../interfaces/database.interface";
 
 export const mongoDbMaker = async (
   databaseURL: string,
