@@ -10,9 +10,6 @@ export const mongoDbMaker = async (
   clientOptions?: MongoClientOptions
 ) => {
   try {
-    const autoDropCollection = JSON.parse(
-      JSON.parse(process.env.AUTO_DROP_COLLECTION)
-    );
     const client: MongoClient = new MongoClient(databaseURL, clientOptions);
     await client.connect();
     const database: Db = client.db(databaseName, databaseOptions);
@@ -25,10 +22,6 @@ export const mongoDbMaker = async (
       ]);
       if (!isCollectionRegistered)
         await database.createCollection(collection.name, collection.schema);
-      else if (autoDropCollection) {
-        await database.collection(collection.name).drop();
-        await database.createCollection(collection.name, collection.schema);
-      }
     });
 
     return database;

@@ -6,6 +6,7 @@ import * as express from "express";
 import * as _ from "lodash";
 import { join } from "path";
 import * as dotenv from "dotenv";
+import "reflect-metadata";
 
 class Bootstrap {
   private app: express.Application;
